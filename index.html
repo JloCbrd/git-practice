@@ -1,70 +1,151 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Team | Git Practice</title>
+    <meta name="description" content="Meet the SAMSAN TECH team - a Git and GitHub collaboration practice project.">
+    <title>Our Team | SAMSAN TECH</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>SAMSAN TECH</h1>
-        <p>Getting started with Git and GitHub collaboration.</p>
+    <header class="site-header">
+        <div class="header-inner">
+            <p class="header-tag">Git &amp; GitHub practice</p>
+            <h1>SAMSAN TECH</h1>
+            <p class="header-sub">Five teammates, one repository. Every card below is a commit someone made.</p>
+        </div>
     </header>
 
-    <main class="team-container">
+    <main>
 
-        <!-- Member 1 -->
-        <div class="team-card">
-            <h2>Member 1</h2>
-            <p><strong>Name:</strong>James</p>
-            <p><strong>Favorite Language:</strong>HTML</p>
-            <p><strong>Hobby:</strong>Pickleball</p>
-            <p><strong>Dream Career:</strong>Web Developer</p>
-        </div>
+        <!-- TEAM -->
+        <section class="section" aria-labelledby="team-title">
+            <h2 id="team-title" class="section-title">Meet the team</h2>
 
-        <!-- Member 2 -->
-        <div class="team-card">
-            <h2>Member 2</h2>
-            <p><strong>Name:</strong>Raven</p>
-            <p><strong>Favorite Language:</strong> CSS</p>
-            <p><strong>Hobby:</strong>Playing games</p>
-            <p><strong>Dream Career:</strong>Database</p>
-        </div>
+            <ol class="timeline">
 
-        <!-- Member 3 -->
-        <div class="team-card">
-            <h2>Member jhill</h2>
-            <p><strong>Name:</strong> Jhill Symhon</p>
-            <p><strong>Favorite Language:</strong> JavaScript</p>
-            <p><strong>Hobby:</strong> Online Games</p>
-            <p><strong>Dream Career:</strong> Web Developer</p>
-        </div>
+                <!-- Member 1 -->
+                <li class="member">
+                    <article class="team-card">
+                        <div class="avatar" aria-hidden="true">J</div>
+                        <div class="card-body">
+                            <h3>James</h3>
+                            <p class="card-role">Member 1</p>
+                            <dl class="details">
+                                <div><dt>Favorite language</dt><dd>HTML</dd></div>
+                                <div><dt>Hobby</dt><dd>Pickleball</dd></div>
+                                <div><dt>Dream career</dt><dd>Web Developer</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+                </li>
 
-        <!-- Member 4 -->
-        <div class="team-card">
-            <h2>Member 4</h2>
-            <p><strong>Name:</strong> Your Name</p>
-            <p><strong>Favorite Language:</strong> PHP</p>
-            <p><strong>Hobby:</strong> Your Hobby</p>
-            <p><strong>Dream Career:</strong> Full-Stack Developer</p>
-        </div>
+                <!-- Member 2 -->
+                <li class="member">
+                    <article class="team-card">
+                        <div class="avatar" aria-hidden="true">R</div>
+                        <div class="card-body">
+                            <h3>Raven</h3>
+                            <p class="card-role">Member 2</p>
+                            <dl class="details">
+                                <div><dt>Favorite language</dt><dd>CSS</dd></div>
+                                <div><dt>Hobby</dt><dd>Playing games</dd></div>
+                                <div><dt>Dream career</dt><dd>Database Administrator</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+                </li>
 
-        <!-- Member 5 -->
-        <div class="team-card">
-            <h2>Member 5</h2>
-            <p><strong>Name:</strong> Your Name</p>
-            <p><strong>Favorite Language:</strong> Python</p>
-            <p><strong>Hobby:</strong> Your Hobby</p>
-            <p><strong>Dream Career:</strong> Software Developer</p>
-        </div>
+                <!-- Member 3 -->
+                <li class="member">
+                    <article class="team-card">
+                        <div class="avatar" aria-hidden="true">JS</div>
+                        <div class="card-body">
+                            <h3>Jhill Symhon</h3>
+                            <p class="card-role">Member 3</p>
+                            <dl class="details">
+                                <div><dt>Favorite language</dt><dd>JavaScript</dd></div>
+                                <div><dt>Hobby</dt><dd>Online games</dd></div>
+                                <div><dt>Dream career</dt><dd>Web Developer</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+                </li>
+
+                <!-- Member 4 (TODO: replace the placeholder text, then remove "is-open" from the class) -->
+                <li class="member">
+                    <article class="team-card is-open">
+                        <div class="avatar" aria-hidden="true">?</div>
+                        <div class="card-body">
+                            <h3>Your Name</h3>
+                            <p class="card-role">Member 4 &middot; open slot</p>
+                            <dl class="details">
+                                <div><dt>Favorite language</dt><dd>PHP</dd></div>
+                                <div><dt>Hobby</dt><dd>Your Hobby</dd></div>
+                                <div><dt>Dream career</dt><dd>Full-Stack Developer</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+                </li>
+
+                <!-- Member 5 (TODO: replace the placeholder text, then remove "is-open" from the class) -->
+                <li class="member">
+                    <article class="team-card is-open">
+                        <div class="avatar" aria-hidden="true">?</div>
+                        <div class="card-body">
+                            <h3>Your Name</h3>
+                            <p class="card-role">Member 5 &middot; open slot</p>
+                            <dl class="details">
+                                <div><dt>Favorite language</dt><dd>Python</dd></div>
+                                <div><dt>Hobby</dt><dd>Your Hobby</dd></div>
+                                <div><dt>Dream career</dt><dd>Software Developer</dd></div>
+                            </dl>
+                        </div>
+                    </article>
+                </li>
+
+            </ol>
+        </section>
+
+        <!-- WORKFLOW -->
+        <section class="section" aria-labelledby="steps-title">
+            <h2 id="steps-title" class="section-title">Add your card</h2>
+            <p class="section-intro">Follow these steps so your changes don't overwrite your teammates' work.</p>
+
+            <ol class="steps">
+                <li>
+                    <h3>Clone the repository</h3>
+                    <code>git clone &lt;repository-url&gt;</code>
+                </li>
+                <li>
+                    <h3>Create your own branch</h3>
+                    <code>git checkout -b add-your-name</code>
+                </li>
+                <li>
+                    <h3>Edit only your card in index.html</h3>
+                    <p>Replace the placeholder text, then remove <code class="inline">is-open</code> from your card.</p>
+                </li>
+                <li>
+                    <h3>Commit your change</h3>
+                    <code>git add index.html<br>git commit -m "Add Member 4 info"</code>
+                </li>
+                <li>
+                    <h3>Push and open a pull request</h3>
+                    <code>git push origin add-your-name</code>
+                    <p>Then open a pull request on GitHub and ask a teammate to review it.</p>
+                </li>
+            </ol>
+        </section>
 
     </main>
 
-    <footer>
-        <p>Created by our team | Git & GitHub Practice</p>
+    <footer class="site-footer">
+        <p>Created by our team &middot; Git &amp; GitHub practice</p>
     </footer>
 
 </body>
