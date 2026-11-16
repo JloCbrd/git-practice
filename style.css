@@ -9,6 +9,7 @@
     --blue: #2457f5;
     --blue-soft: #e4ebff;
     --orange: #f26b3a;
+    --orange-deep: #d4521f; /* darker orange so white text passes WCAG AA */
 
     --font-head: "Bricolage Grotesque", "Segoe UI", Arial, sans-serif;
     --font-body: "Source Sans 3", "Segoe UI", Arial, sans-serif;
@@ -16,6 +17,9 @@
 
     --radius: 14px;
     --rail: 28px;
+
+    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ---------- Reset ---------- */
@@ -27,11 +31,20 @@
     box-sizing: border-box;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
 body {
     font-family: var(--font-body);
     font-size: 17px;
     line-height: 1.6;
-    background: var(--bg);
+    background-color: var(--bg);
+    /* faint dot grid */
+    background-image: radial-gradient(rgba(16, 24, 40, 0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
     color: var(--ink);
     min-height: 100vh;
     display: flex;
@@ -47,17 +60,144 @@ main {
     outline-offset: 3px;
 }
 
+/* ---------- Keyframes ---------- */
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes draw {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes ping {
+    0% {
+        transform: scale(1);
+        opacity: 0.55;
+    }
+    80%,
+    100% {
+        transform: scale(2.6);
+        opacity: 0;
+    }
+}
+
+@keyframes breathe {
+    0%,
+    100% {
+        box-shadow: 0 0 0 2px var(--muted);
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgba(91, 102, 120, 0.18);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes drift {
+    from {
+        transform: translate3d(-4%, -3%, 0) scale(1);
+    }
+    to {
+        transform: translate3d(5%, 4%, 0) scale(1.12);
+    }
+}
+
+@keyframes grow {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes progress {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* ---------- Scroll progress bar (CSS-only, where supported) ---------- */
+@supports (animation-timeline: scroll()) {
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0 0 auto 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--blue), var(--orange));
+        transform: scaleX(0);
+        transform-origin: left;
+        animation: progress linear both;
+        animation-timeline: scroll(root);
+        z-index: 100;
+    }
+}
+
 /* ---------- Header ---------- */
 .site-header {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
     background: var(--navy);
     color: #fff;
     padding: 72px 24px 80px;
     border-bottom: 6px solid var(--orange);
 }
 
+/* drifting colour glows */
+.site-header::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    z-index: -2;
+    background:
+        radial-gradient(40% 50% at 18% 30%, rgba(36, 87, 245, 0.55), transparent 70%),
+        radial-gradient(35% 45% at 85% 70%, rgba(242, 107, 58, 0.35), transparent 70%),
+        radial-gradient(30% 40% at 60% 10%, rgba(109, 61, 240, 0.3), transparent 70%);
+    animation: drift 14s ease-in-out infinite alternate;
+}
+
+/* fine grid, fading out toward the bottom */
+.site-header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 20%, transparent 95%);
+    mask-image: linear-gradient(to bottom, #000 20%, transparent 95%);
+}
+
 .header-inner {
     max-width: 760px;
     margin: 0 auto;
+}
+
+.header-inner > * {
+    animation: rise 0.8s var(--ease-out) both;
 }
 
 .header-tag {
@@ -66,7 +206,10 @@ main {
     font-weight: 600;
     color: #c7d3f5;
     background: rgba(255, 255, 255, 0.08);
-    padding: 4px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    padding: 4px 14px;
     border-radius: 999px;
     margin-bottom: 20px;
 }
@@ -78,12 +221,15 @@ main {
     line-height: 1;
     letter-spacing: -0.02em;
     margin-bottom: 18px;
+    text-shadow: 0 6px 30px rgba(36, 87, 245, 0.45);
+    animation-delay: 0.12s;
 }
 
 .header-sub {
     font-size: 1.1rem;
     color: #b8c2d6;
     max-width: 46ch;
+    animation-delay: 0.24s;
 }
 
 /* ---------- Sections ---------- */
@@ -101,9 +247,22 @@ main {
     margin-bottom: 8px;
 }
 
+/* little accent bar under each section title */
+.section-title::after {
+    content: "";
+    display: block;
+    width: 52px;
+    height: 4px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--blue), var(--orange));
+    transform-origin: left;
+    animation: grow 0.8s var(--ease-out) 0.2s both;
+}
+
 .section-intro {
     color: var(--muted);
-    margin-bottom: 28px;
+    margin: 12px 0 28px;
     max-width: 56ch;
 }
 
@@ -115,7 +274,7 @@ main {
     padding-left: calc(var(--rail) + 20px);
 }
 
-/* the vertical branch line */
+/* the vertical branch line, drawn top to bottom on load */
 .timeline::before {
     content: "";
     position: absolute;
@@ -123,13 +282,25 @@ main {
     top: 8px;
     bottom: 8px;
     width: 2px;
-    background: var(--line);
+    background: linear-gradient(to bottom, var(--blue), var(--line) 70%);
+    transform-origin: top;
+    animation: draw 1.4s var(--ease-out) 0.3s both;
 }
 
 .member {
+    --accent: var(--blue);
+    --dot-left: calc(-1 * (var(--rail) + 20px) + var(--rail) / 2 - 7px);
+    --dot-top: 30px;
+
     position: relative;
     margin-bottom: 20px;
 }
+
+/* each teammate gets their own colour */
+.member:nth-child(2) { --accent: #6d3df0; }
+.member:nth-child(3) { --accent: #0b7f70; }
+.member:nth-child(4) { --accent: var(--orange-deep); }
+.member:nth-child(5) { --accent: #b8286e; }
 
 .member:last-child {
     margin-bottom: 0;
@@ -139,23 +310,53 @@ main {
 .member::before {
     content: "";
     position: absolute;
-    left: calc(-1 * (var(--rail) + 20px) + var(--rail) / 2 - 7px);
-    top: 30px;
+    left: var(--dot-left);
+    top: var(--dot-top);
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: var(--blue);
+    background: var(--accent);
     border: 3px solid var(--bg);
-    box-shadow: 0 0 0 2px var(--blue);
+    box-shadow: 0 0 0 2px var(--accent);
+    transition: transform 0.35s var(--ease-spring);
 }
 
+/* sonar ring around filled dots */
+.member::after {
+    content: "";
+    position: absolute;
+    left: var(--dot-left);
+    top: var(--dot-top);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    pointer-events: none;
+    animation: ping 2.8s ease-out infinite;
+}
+
+.member:nth-child(2)::after { animation-delay: 0.5s; }
+.member:nth-child(3)::after { animation-delay: 1s; }
+
+.member:hover::before {
+    transform: scale(1.3);
+}
+
+/* open slots: hollow dot that gently breathes, no sonar */
 .member:has(.is-open)::before {
     background: var(--bg);
     box-shadow: 0 0 0 2px var(--muted);
+    animation: breathe 3s ease-in-out infinite;
+}
+
+.member:has(.is-open)::after {
+    display: none;
 }
 
 /* ---------- Cards ---------- */
 .team-card {
+    position: relative;
+    overflow: hidden;
     display: flex;
     gap: 20px;
     align-items: flex-start;
@@ -163,11 +364,49 @@ main {
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 24px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    transition:
+        transform 0.35s var(--ease-out),
+        box-shadow 0.35s var(--ease-out),
+        border-color 0.35s var(--ease-out);
+}
+
+/* accent bar that sweeps in along the top edge on hover */
+.team-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 40%, var(--orange)));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease-out);
+}
+
+.team-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+    box-shadow: 0 18px 34px -16px rgba(16, 24, 40, 0.28);
+}
+
+.team-card:hover::before {
+    transform: scaleX(1);
 }
 
 .team-card.is-open {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.35);
     border-style: dashed;
+    box-shadow: none;
+}
+
+.team-card.is-open::before {
+    display: none;
+}
+
+.team-card.is-open:hover {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: var(--muted);
+    box-shadow: none;
 }
 
 .avatar {
@@ -180,14 +419,22 @@ main {
     font-family: var(--font-head);
     font-weight: 700;
     font-size: 1.15rem;
-    background: var(--blue-soft);
-    color: var(--blue);
+    background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 78%, #fff));
+    color: #fff;
+    box-shadow: 0 6px 14px -6px var(--accent);
+    transition: transform 0.45s var(--ease-spring);
+}
+
+.team-card:hover .avatar {
+    transform: rotate(-8deg) scale(1.1);
 }
 
 .is-open .avatar {
     background: transparent;
     border: 2px dashed var(--muted);
+    box-shadow: none;
     color: var(--muted);
+    animation: float 3.2s ease-in-out infinite;
 }
 
 .card-body {
@@ -239,6 +486,16 @@ main {
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 18px 20px 18px 68px;
+    transition:
+        transform 0.3s var(--ease-out),
+        box-shadow 0.3s var(--ease-out),
+        border-color 0.3s var(--ease-out);
+}
+
+.steps li:hover {
+    transform: translateX(6px);
+    border-color: var(--orange);
+    box-shadow: 0 12px 26px -16px rgba(16, 24, 40, 0.3);
 }
 
 .steps li::before {
@@ -253,8 +510,13 @@ main {
     place-items: center;
     font-family: var(--font-head);
     font-weight: 700;
-    background: var(--orange);
+    background: var(--orange-deep);
     color: #fff;
+    transition: transform 0.4s var(--ease-spring);
+}
+
+.steps li:hover::before {
+    transform: scale(1.15) rotate(-6deg);
 }
 
 .steps h3 {
@@ -279,6 +541,7 @@ main {
     color: #e6ebf5;
     padding: 10px 14px;
     border-radius: 8px;
+    border-left: 3px solid var(--orange);
     overflow-x: auto;
     white-space: nowrap;
 }
@@ -288,6 +551,32 @@ main {
     padding: 2px 6px;
     font-size: 0.88rem;
     border-radius: 4px;
+    border-left: 0;
+}
+
+/* ---------- Scroll reveal ---------- */
+/* Modern browsers: cards and steps rise into view as you scroll. */
+@supports (animation-timeline: view()) {
+    .member,
+    .steps li {
+        animation: rise linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 45%;
+    }
+}
+
+/* Older browsers: simple staggered entrance on load instead. */
+@supports not (animation-timeline: view()) {
+    .member,
+    .steps li {
+        animation: rise 0.7s var(--ease-out) both;
+    }
+
+    .member:nth-child(1) { animation-delay: 0.3s; }
+    .member:nth-child(2) { animation-delay: 0.4s; }
+    .member:nth-child(3) { animation-delay: 0.5s; }
+    .member:nth-child(4) { animation-delay: 0.6s; }
+    .member:nth-child(5) { animation-delay: 0.7s; }
 }
 
 /* ---------- Footer ---------- */
@@ -298,6 +587,7 @@ main {
     color: var(--muted);
     font-size: 0.92rem;
     border-top: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 /* ---------- Mobile ---------- */
@@ -322,9 +612,9 @@ main {
         left: 6px;
     }
 
-    .member::before {
-        left: -28px;
-        top: 26px;
+    .member {
+        --dot-left: -28px;
+        --dot-top: 26px;
     }
 
     .team-card {
@@ -339,5 +629,19 @@ main {
 
     .steps li::before {
         left: 16px;
+    }
+
+    .steps li:hover {
+        transform: none;
+    }
+}
+
+/* ---------- Respect reduced-motion settings ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
     }
 }
