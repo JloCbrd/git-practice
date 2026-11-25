@@ -3,157 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Meet the SAMSAN TECH team - a Git and GitHub collaboration practice project.">
     <title>Our Team | SAMSAN TECH</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
-    <!-- Dark mode (adds the toggle button automatically) -->
     <script src="darkmode.js"></script>
 </head>
 <body>
 
     <header class="site-header">
-        <div class="header-inner">
-            <p class="header-tag">Git &amp; GitHub practice</p>
-            <h1>SAMSAN TECH</h1>
-            <p class="header-sub">Five teammates, one repository. Every card below is a commit someone made.</p>
-
-            <div class="hero-log" aria-hidden="true">
-                <span class="t1">git clone samsan-tech</span>
-                <span class="t2">git checkout -b add-your-name</span>
-                <span class="t3">git push origin add-your-name</span>
-            </div>
-        </div>
+        <h1>SAMSAN TECH</h1>
+        <p>Five teammates, one repository. Git &amp; GitHub practice.</p>
     </header>
 
     <main>
+        <section>
+            <h2>Meet the team</h2>
 
-        <!-- TEAM -->
-        <section class="section" aria-labelledby="team-title">
-            <h2 id="team-title" class="section-title">Meet the team</h2>
+            <article class="card">
+                <h3>James</h3>
+                <p class="role">Member 1</p>
+                <ul>
+                    <li>Favorite language: HTML</li>
+                    <li>Hobby: Pickleball</li>
+                    <li>Dream career: Web Developer</li>
+                </ul>
+            </article>
 
-            <ol class="timeline">
+            <article class="card">
+                <h3>Raven</h3>
+                <p class="role">Member 2</p>
+                <ul>
+                    <li>Favorite language: CSS</li>
+                    <li>Hobby: Playing games</li>
+                    <li>Dream career: Database Administrator</li>
+                </ul>
+            </article>
 
-                <!-- Member 1 -->
-                <li class="member">
-                    <article class="team-card">
-                        <div class="avatar" aria-hidden="true">J</div>
-                        <div class="card-body">
-                            <h3>James</h3>
-                            <p class="card-role">Member 1</p>
-                            <dl class="details">
-                                <div><dt>Favorite language</dt><dd>HTML</dd></div>
-                                <div><dt>Hobby</dt><dd>Pickleball</dd></div>
-                                <div><dt>Dream career</dt><dd>Web Developer</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-                </li>
+            <article class="card">
+                <h3>Jhill Symhon</h3>
+                <p class="role">Member 3</p>
+                <ul>
+                    <li>Favorite language: JavaScript</li>
+                    <li>Hobby: Online games</li>
+                    <li>Dream career: Web Developer</li>
+                </ul>
+            </article>
 
-                <!-- Member 2 -->
-                <li class="member">
-                    <article class="team-card">
-                        <div class="avatar" aria-hidden="true">R</div>
-                        <div class="card-body">
-                            <h3>Raven</h3>
-                            <p class="card-role">Member 2</p>
-                            <dl class="details">
-                                <div><dt>Favorite language</dt><dd>CSS</dd></div>
-                                <div><dt>Hobby</dt><dd>Playing games</dd></div>
-                                <div><dt>Dream career</dt><dd>Database Administrator</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-                </li>
+            <!-- TODO: replace placeholder text, then remove "open" from class -->
+            <article class="card open">
+                <h3>Your Name</h3>
+                <p class="role">Member 4 (open slot)</p>
+                <ul>
+                    <li>Favorite language: PHP</li>
+                    <li>Hobby: Your Hobby</li>
+                    <li>Dream career: Full-Stack Developer</li>
+                </ul>
+            </article>
 
-                <!-- Member 3 -->
-                <li class="member">
-                    <article class="team-card">
-                        <div class="avatar" aria-hidden="true">JS</div>
-                        <div class="card-body">
-                            <h3>Jhill Symhon</h3>
-                            <p class="card-role">Member 3</p>
-                            <dl class="details">
-                                <div><dt>Favorite language</dt><dd>JavaScript</dd></div>
-                                <div><dt>Hobby</dt><dd>Online games</dd></div>
-                                <div><dt>Dream career</dt><dd>Web Developer</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-                </li>
-
-                <!-- Member 4 (TODO: replace the placeholder text, then remove "is-open" from the class) -->
-                <li class="member">
-                    <article class="team-card is-open">
-                        <div class="avatar" aria-hidden="true">?</div>
-                        <div class="card-body">
-                            <h3>Your Name</h3>
-                            <p class="card-role">Member 4 &middot; open slot</p>
-                            <dl class="details">
-                                <div><dt>Favorite language</dt><dd>PHP</dd></div>
-                                <div><dt>Hobby</dt><dd>Your Hobby</dd></div>
-                                <div><dt>Dream career</dt><dd>Full-Stack Developer</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-                </li>
-
-                <!-- Member 5 (TODO: replace the placeholder text, then remove "is-open" from the class) -->
-                <li class="member">
-                    <article class="team-card is-open">
-                        <div class="avatar" aria-hidden="true">?</div>
-                        <div class="card-body">
-                            <h3>Your Name</h3>
-                            <p class="card-role">Member 5 &middot; open slot</p>
-                            <dl class="details">
-                                <div><dt>Favorite language</dt><dd>Python</dd></div>
-                                <div><dt>Hobby</dt><dd>Your Hobby</dd></div>
-                                <div><dt>Dream career</dt><dd>Software Developer</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-                </li>
-
-            </ol>
+            <!-- TODO: replace placeholder text, then remove "open" from class -->
+            <article class="card open">
+                <h3>Your Name</h3>
+                <p class="role">Member 5 (open slot)</p>
+                <ul>
+                    <li>Favorite language: Python</li>
+                    <li>Hobby: Your Hobby</li>
+                    <li>Dream career: Software Developer</li>
+                </ul>
+            </article>
         </section>
 
-        <!-- WORKFLOW -->
-        <section class="section" aria-labelledby="steps-title">
-            <h2 id="steps-title" class="section-title">Add your card</h2>
-            <p class="section-intro">Follow these steps so your changes don't overwrite your teammates' work.</p>
-
+        <section>
+            <h2>Add your card</h2>
             <ol class="steps">
-                <li>
-                    <h3>Clone the repository</h3>
-                    <code>git clone &lt;repository-url&gt;</code>
-                </li>
-                <li>
-                    <h3>Create your own branch</h3>
-                    <code>git checkout -b add-your-name</code>
-                </li>
-                <li>
-                    <h3>Edit only your card in index.html</h3>
-                    <p>Replace the placeholder text, then remove <code class="inline">is-open</code> from your card.</p>
-                </li>
-                <li>
-                    <h3>Commit your change</h3>
-                    <code>git add index.html<br>git commit -m "Add Member 4 info"</code>
-                </li>
-                <li>
-                    <h3>Push and open a pull request</h3>
-                    <code>git push origin add-your-name</code>
-                    <p>Then open a pull request on GitHub and ask a teammate to review it.</p>
-                </li>
+                <li>Clone the repo: <code>git clone &lt;repository-url&gt;</code></li>
+                <li>Create your branch: <code>git checkout -b add-your-name</code></li>
+                <li>Edit only your card in <code>index.html</code>, then remove <code>open</code> from its class.</li>
+                <li>Commit: <code>git add index.html</code> then <code>git commit -m "Add Member 4 info"</code></li>
+                <li>Push: <code>git push origin add-your-name</code>, then open a pull request on GitHub.</li>
             </ol>
         </section>
-
     </main>
 
-    <footer class="site-footer">
+    <footer>
         <p>Created by our team &middot; Git &amp; GitHub practice</p>
     </footer>
 
